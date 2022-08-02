@@ -15,3 +15,4 @@ function component() {
 }
 
 document.body.appendChild(component());
+document.getElementById('test').innerHTML = 'Test your code'
