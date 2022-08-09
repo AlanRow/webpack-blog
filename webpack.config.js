@@ -1,12 +1,17 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const isDev = process.env.NODE_ENV === 'development'
+
 module.exports = {  
   entry: {
-    index: './src/index.js',
-    print: './src/print.js',
+    index: './src/assets/js/main.js',
   },
-  mode: 'development',
+  mode: isDev ? 'development' : 'production',
+  devtool: isDev ? 'eval-source-map' : false,
+  devServer: {
+    static: './dist',
+  },
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -14,8 +19,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Tutorial III',
-      template: './src/index.html'
+      title: 'My Blog',
+      template: './src/public/index.html'
     }),
   ],
+  // optimization: {
+  //   runtimeChunk: 'single',
+  // },
 };
