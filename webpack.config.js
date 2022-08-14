@@ -1,11 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {  
   entry: {
-    index: './src/assets/js/main.js',
+    index: './src/pages/index.js',
   },
   mode: isDev ? 'development' : 'production',
   devtool: isDev ? 'eval-source-map' : false,
@@ -21,6 +22,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'My Blog',
       template: './src/public/index.html'
+    }),
+    new CopyPlugin({
+      patterns: ["./src/public/favicon.ico"],
     }),
   ],
   // optimization: {
